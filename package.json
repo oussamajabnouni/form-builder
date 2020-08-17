@@ -1,0 +1,32 @@
+{
+  "name": "form-builder",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "clean": "lerna clean --yes && rimraf node_modules",
+    "clean:build": "lerna exec -- rimraf \"{.next,dist,build}\"",
+    "dev": "concurrently \"yarn workspace @form-builder/server dev\" \"yarn workspace @form-builder/web-client dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.0",
+    "lint-staged": "^10.2.7",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,md,css}": [
+      "prettier --trailing-comma es5 --single-quote --write"
+    ]
+  }
+}
